@@ -1,5 +1,5 @@
 """Main script, uses other modules to generate sentences."""
-from flask import Flask
+from flask import Flask, render_template
 from cleanup import TextParser
 from tokens import TextTokenizer
 from sentence import MarkovSentenceGenerator
@@ -28,7 +28,7 @@ tweet_generator = MarkovSentenceGenerator(tokenized_corpus)
 def home():
     """Route that returns a web page containing the generated text."""
     sentence = tweet_generator.generate_sentence(20)
-    return f"<p>{sentence}</p>"
+    return render_template('home.html', sentence=sentence)
 
 
 if __name__ == "__main__":
